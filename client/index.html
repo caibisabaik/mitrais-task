@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <title>Mitrais Coding Test</title>
+        <link rel="stylesheet" type="text/css" href="/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="js/base/functionLib.js"></script>
+    </head>
+<body>
+    <div id="registerPage">
+        <h2 style="padding-left: 10px;">Registration</h2>
+        <div style="text-align: center;">
+            <input id="mobile-number" placeholder="Mobile number" type="text" class="inputArea" autocomplete="on">
+                <div class="popup">
+                    <span class="popuptext hidden" id="mobile-phone-popup">A Warning Popup</span>
+                </div>
+            </input>
+            <input id="first-name" placeholder="First name" type="text" class="inputArea" autocomplete="on">
+                <div class="popup">
+                    <span class="popuptext hidden" id="first-name-popup">A Warning Popup</span>
+                </div>
+            </input>
+            <input id="last-name" placeholder="Last name" type="text" class="inputArea" autocomplete="on">
+                <div class="popup">
+                    <span class="popuptext hidden" id="last-name-popup">A Warning Popup</span>
+                </div>
+            </input>   
+        </div>
+        <p style="padding-left: 20px;font-size: smaller;">Date of Birth</p>
+        <div style="text-align: center;">
+            <input id="birthdate-input" placeholder="Date" type="date" class="inputArea"></input>
+        </div>
+        <div style="display: table; padding-bottom: 30px;">
+            <span style="margin-left:30px">
+                <input type="radio" id="male" name="gender" value="male" style="display: table-row;" checked>
+                <label for="male">Male</label>
+            </span>
+            <span style="margin-left: 10px;">
+                <input type="radio" id="female" name="gender" value="female" style="display: table-row;">
+                <label for="female">Female</label>
+            </span>
+        </div>
+        <div style="text-align: center;">
+            <input id="email-input" placeholder="E-mail" type="email" class="inputArea" autocomplete="on" autocomplete="email">
+                <div class="popup">
+                    <span class="popuptext hidden" id="email-popup">A Warning Popup</span>
+                </div>
+            </input>
+        </div>
+        <div style="text-align: center; padding-bottom: 30px;">
+            <button id="registerBtn">
+                REGISTER
+            </button>
+        </div>
+    </div>
+    <div id="footer-area" class="footerArea hidden">
+        <div style="text-align: center; padding-bottom: 30px;">
+            <button id="loginBtn">
+                LOGIN
+            </button>
+        </div>
+    </div>
+    <script src="js/registerController.js"></script>
+</body>
+</html>

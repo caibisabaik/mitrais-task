@@ -1,0 +1,11 @@
+{
+    "http": {
+        "port": 8008,
+        "bind": "0.0.0.0"
+    },
+    "ssl": {
+        "enabled": false,
+        "key": "",
+        "cert": ""
+    }
+}

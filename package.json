@@ -1,0 +1,27 @@
+{
+  "name": "mitrais-task",
+  "version": "1.0.0",
+  "description": "mitrais coding test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caibisabaik/mitrais-task.git"
+  },
+  "keywords": [
+    "coding",
+    "test"
+  ],
+  "author": "airlangga putera panigoro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caibisabaik/mitrais-task/issues"
+  },
+  "homepage": "https://github.com/caibisabaik/mitrais-task#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
