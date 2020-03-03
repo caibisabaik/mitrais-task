@@ -27,6 +27,11 @@ if(config != null) {
             httpRouter.use(express.static('./client'));
             httpRouter.use('/api', register(app));
 
+            httpRouter.get('/',(req, res) => {
+                res.writeHead(200);
+                res.end('not found');
+            });
+
             if(config.ssl.enabled) {
                 https.createServer({
                     key: config.ssl.key,
@@ -43,6 +48,5 @@ if(config != null) {
             console.error('unable to connect to database');
             process.exit();
         }
-        
     });
 }

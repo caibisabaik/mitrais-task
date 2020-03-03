@@ -5,6 +5,7 @@
     const registerBtn = $("#registerBtn");
     const registerPage = $("#registerPage");
     const footerArea = $("#footer-area");
+    const registeringInfo = $("#registering-info");
 
     const mobileTextInput = $("#mobile-number");
     const emailTextInput = $("#email-input");
@@ -37,6 +38,7 @@
 
         if(res.error === null) {
             registerPage.addClass('disabled');
+            registeringInfo.removeClass('hidden');
             res = await checkDataValidity();
         }
         
@@ -56,11 +58,14 @@
             }
             res = await restAPI(postData.api, postData);
             if(res.error === null) {
+                registeringInfo.addClass('hidden');
                 footerArea.removeClass('hidden');
             } else {
+                registeringInfo.addClass('hidden');
                 registerPage.removeClass('disabled');
             }
         } else {
+            registeringInfo.addClass('hidden');
             registerPage.removeClass('disabled');
         }
         console.log(res);

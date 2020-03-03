@@ -124,15 +124,23 @@ class PgRegister {
     }
 
     registerUser(arg) {
-        return new Promise ((resolve) => {
+        return new Promise (async (resolve) => {
             let result = this.pgPreflightCheck(arg, ['phoneNumber', 'firstName', 'lastName', 'email', 'birthDate', 'gender']);
-            this.models['user'].create(arg).then(res => {
-                result.result = res;
+            let phoneValidationRes = this.validPhoneNumber({phoneNumber:arg.phoneNumber});
+            let emailValidationRes = this.validEmail({email:arg.email});
+            if(phoneValidationRes.result && emailValidationRes.result) {
+                this.models['user'].create(arg).then(res => {
+                    result.result = res;
+                    resolve(result);
+                }).catch(e => {
+                    result.error = e;
+                    resolve(result);
+                });
+            } else {
+                result.error = true;
+                result.result = 'Failed to create new user, phoneNumber and/or email has been register';
                 resolve(result);
-            }).catch(e => {
-                result.error = e;
-                resolve(result);
-            });
+            }
         });
     }
 

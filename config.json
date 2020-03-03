@@ -15,5 +15,6 @@
         "password" : "",
         "database" : "mitrais",
         "defaultDatabase" : "atapteduh"
-    }
+    },
+    "apiEndpoint": "http://localhost:8008/api"
 }
