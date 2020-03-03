@@ -36,16 +36,15 @@
         }
 
         if(res.error === null) {
+            registerPage.addClass('disabled');
             res = await checkDataValidity();
         }
         
         if(res.error === null) {
-            registerPage.addClass('disabled');
-            footerArea.removeClass('hidden');
             const birthDate = $("#birthdate-input");
             const gender = $("input[name='gender']:checked").val();
             const postData = {
-                api: 'register',
+                api: 'api/register',
                 data: {
                     phoneNumber : mobileNumberInput.val(),
                     firstName   : firstNameInput.val(),
@@ -56,6 +55,13 @@
                 },
             }
             res = await restAPI(postData.api, postData);
+            if(res.error === null) {
+                footerArea.removeClass('hidden');
+            } else {
+                registerPage.removeClass('disabled');
+            }
+        } else {
+            registerPage.removeClass('disabled');
         }
         console.log(res);
     });
@@ -79,11 +85,17 @@
     var checkMobileNumberValidity = ()=> {
         let res = {error:null, result:true}
         return new Promise(async (resolve)=> {
-            // check if indeed the number is unique (restAPI)
-            if(res.error === null) {
-                
-            } else {
+            const phoneData = {
+                api: 'api/validphone',
+                data: {
+                    phoneNumber : mobileNumberInput.val()
+                },
+            }
+           
+            res = await restAPI(phoneData.api, phoneData);
+            if(!res.result) {
                 res.error = true;
+                res.result = 'Mobile number has been registered';
                 mobileNumberPopup.html('Mobile number has been registered');
                 mobileNumberPopup.removeClass("hidden");
             }
@@ -94,11 +106,17 @@
     var checkEmailValidity = () => {
         let res = {error:null, result:true}
         return new Promise(async (resolve)=> {
-             // check if indeed email is unique (restAPI)
-            if(res.error === null) {
-               
-            } else {
+            const emailData = {
+                api: 'api/validemail',
+                data: {
+                    email : emailInput.val()
+                },
+            }
+           
+            res = await restAPI(emailData.api, emailData);
+            if(!res.result) {
                 res.error = true;
+                res.result = 'Email has been registered';
                 emailPopUp.html('Email has been registered');
                 emailPopUp.removeClass("hidden");
             }

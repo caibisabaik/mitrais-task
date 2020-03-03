@@ -3,6 +3,7 @@ var express = require('express');
 var https = require('https');
 var bodyParser = require('body-parser');
 var register = require('./routes/api/registerAPI');
+var appRegister = require('./AppRegister');
 
 let config = null;
 const configFile = './config.json';
@@ -21,19 +22,27 @@ if(config != null) {
     httpRouter.use(bodyParser.json());
     httpRouter.use(bodyParser.urlencoded({ extended: false }));
 
-    httpRouter.use(express.static('./client'));
-    httpRouter.use('/register', register())
+    appRegister.create(config).then(app => {
+        if(app !== null) {
+            httpRouter.use(express.static('./client'));
+            httpRouter.use('/api', register(app));
 
-    if(config.ssl.enabled) {
-        https.createServer({
-            key: config.ssl.key,
-            cert: config.ssl.cert
-        }, httpRouter).listen(config.http.port, config.http.bind, () => {
-            console.log('https listening on port ', config.http.port, ' bound on ' + config.http.bind);
-        });
-    } else {
-        httpRouter.listen(config.http.port, config.http.bind, () => {
-            console.log('http listening on port ', config.http.port, ' bound on ' + config.http.bind);
-        });
-    }
+            if(config.ssl.enabled) {
+                https.createServer({
+                    key: config.ssl.key,
+                    cert: config.ssl.cert
+                }, httpRouter).listen(config.http.port, config.http.bind, () => {
+                    console.log('https listening on port ', config.http.port, ' bound on ' + config.http.bind);
+                });
+            } else {
+                httpRouter.listen(config.http.port, config.http.bind, () => {
+                    console.log('http listening on port ', config.http.port, ' bound on ' + config.http.bind);
+                });
+            }
+        } else {
+            console.error('unable to connect to database');
+            process.exit();
+        }
+        
+    });
 }
