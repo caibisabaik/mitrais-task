@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 let config = null;
 const configFile = './config.json';
-
+//mantap
 let configContent = fs.readFileSync(configFile, 'utf8');
     config = JSON.parse(configContent);
     console.log(config.apiEndpoint);
